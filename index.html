@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link  rel="stylesheet" href="app.css">
+    <title>VueJS</title>
+  </head>
+  <body>
+  	
+  	<div class = "container pt-5" id="app">
+  		<div class = "pow mb-3">
+  			<div class = "col">
+  				<h1>Cars application</h1>
+  			</div>
+  		</div>
+  		
+  		<div class = "row">
+  			<div class ="col-md-4">
+  				<label for="search">Find your car</label>
+  				<input 
+  					type="text" 
+  					class="form-control" 
+  					placeholder="Name, model ..."
+  					v-model="search">
+  				<hr>
+
+  				<ul class="list-group">
+  					<li 
+  						v-for="(car, index) in filteredCars"
+  					   class="list-group-item list-group-item-action pointer"
+  					   v-on:click="selectCar(index)"
+  					   v-bind:class="{'active': selectedCarIndex === index}">
+  						{{ car.name }} - {{ car.model }}
+  					</li>
+  				</ul>
+
+  			</div>
+
+  			<div class = "col-md-8 pt-4">
+  				<div class="row">
+  					<div class="col-md-5">
+  						<h2>{{ car.name }}</h2>
+  						<img 
+  							v-bind:src= "car.image"
+  							v-bind:alt= "car.name"
+  							class="rounded detailed-car-image">
+  					</div>
+  					<div class="col-md-7 pt-2">
+  						<h5>Car details</h5>
+
+  						<ul>
+  							<li>Model - <strong>{{ car.model }}</strong></li>
+  							<li>Year - <strong>{{ car.year }}</strong></li>
+  							<li>Owner - <strong>{{ car.owner }}</strong></li>
+  						</ul>
+
+  						<div class = "phone-block">
+  							<p v-if="phoneVisibility">{{ car.phone }}</p>
+  						</div>
+
+  						<button class="btn btn-outline-success mr-3 button-width"
+  						v-on:click="phoneVisibility = !phoneVisibility"
+  						> {{ phoneBtnText }} phone</button>
+  						<button class="btn btn-primary">Buy</button>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+  <script src="app.js"></script>
+  </body>
+</html>
