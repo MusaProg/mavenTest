@@ -1,6 +1,11 @@
-const car = (name, model, owner, year, phone, images) => 
-	({name, model, owner, year, phone,
-		image: "images/" + images + ".jpg"})
+
+len = 0;
+
+const car = function (name, model, owner, year, phone, images){
+	len += 1;
+	return {id: len - 1, name, model, owner, year, phone,
+		image: "images/" + images + ".jpg"}				
+}
 
 const cars = [
 	car("Ford", "Focus", "Musa", 2019, "+7 981 716 97 75", "car1"),
@@ -15,7 +20,8 @@ new Vue({
 		car: cars[0],
 		selectedCarIndex: 0,
 		phoneVisibility: false,
-		search: ""
+		search: "",
+		modalVisibility: false
 	},
 	methods: {
 		selectCar: function (index){
@@ -28,9 +34,9 @@ new Vue({
 			return this.phoneVisibility ? 'Hide' : 'Show';
 		},
 		filteredCars: function(){
-			var self = this;
-			return self.cars.filter(function(currentCar){
-				return currentCar.name.toUpperCase().indexOf(self.search.toUpperCase()) > -1 || currentCar.model.toUpperCase().indexOf(self.search.toUpperCase()) > -1;
+			return this.cars.filter(currentCar => {
+				return currentCar.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 ||
+					 currentCar.model.toUpperCase().indexOf(this.search.toUpperCase()) > -1;
  			});
 		}
 	}
